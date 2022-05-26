@@ -10,9 +10,13 @@
               <app-mensagem
                   *ngIf="novoUsuarioform.get('email')?.errors?.required &&
                    novoUsuarioform.get('email')?.touched "
-                   mensagem="Email Obrigatório">
+                   mensagem="E-mail Obrigatório">
               </app-mensagem>
-
+              <app-mensagem
+              *ngIf="novoUsuarioform.get('email')?.errors?.email  &&
+              novoUsuarioform.get('email')?.touched"
+               mensagem="E-mail no formato  incorreto">
+              </app-mensagem>
   </div>
   <div class="form-group">
       <input type="text"
@@ -21,8 +25,9 @@
              formControlName="fullName"
              />
              <app-mensagem mensagem="Nome completo"
-              *ngIf="novoUsuarioform.get('fullName')?.errors "
-              mensagem="Nome"                    >
+              *ngIf="novoUsuarioform.get('fullName')?.errors &&
+              novoUsuarioform.get('fullName')?.touched"
+              mensagem="O Nome é Obrigatório"                    >
              </app-mensagem>
   </div>
   <div class="form-group">
@@ -31,6 +36,16 @@
           class="form-control"
           formControlName="userName"
           />
+          <app-mensagem
+          *ngIf="novoUsuarioform.get('userName')?.errors?.minusculo &&
+          novoUsuarioform.get('userName')?.touched "
+          mensagem="O usuario deve ser em letra minuscula"
+          ></app-mensagem>
+
+          <app-mensagem
+          *ngIf="novoUsuarioform.get('userName')?.errors?.usuarioExistente"
+          mensagem="Usuario já existe"
+          ></app-mensagem>
   </div>
   <div class="form-group">
      <input type="password"
@@ -38,8 +53,13 @@
             class="form-control"
             formControlName="password"
             />
+            <app-mensagem
+             *ngIf="novoUsuarioform.errors?.senhaIgualUsuario"
+             mensagem="A senha deve ser diferente do usuario">
+
+            </app-mensagem>
   </div>
-  <button class="btn btn-primary btn-block">Cadastro</button>
+  <button class="btn btn-primary btn-block"> Cadastro</button>
 </form>
 
-<p>Já é um usuario?<a [routerLink]="['']"> Faça login</a></p>
+<p>já tem cadastro?<a [routerLink]="['']"> Faça Login</a></p>

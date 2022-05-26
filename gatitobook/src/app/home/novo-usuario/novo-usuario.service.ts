@@ -13,6 +13,10 @@ export class NovoUsuarioService {
     CadastroNovoUser(novoUsuario: NovoUsuario){
     return this.http.post('http://localhost:3000/user/signup', novoUsuario);
 
-
   }
+
+    // chamada asyncrona
+    verificaUsuarioExistente(nomeUsuario:string){
+      return this.http.get(`http://localhost:3000/user/exists/${nomeUsuario}`)
+    }
 }
